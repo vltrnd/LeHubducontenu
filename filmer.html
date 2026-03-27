@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Je veux filmer — La Régie Aeconomia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#0e0e0d;--bg2:#161614;--bg3:#1e1d1b;--bg4:#222220;
+  --ow:#F5F3EF;--beige:#c2b8ae;--beige2:#e2dfd6;
+  --sage:#89a596;--sage-dim:rgba(137,165,150,.12);--sage-border:rgba(137,165,150,.22);
+  --muted:rgba(245,243,239,.42);--border:rgba(245,243,239,.07);
+  --card:rgba(245,243,239,.04);--card2:rgba(245,243,239,.08);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ow);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+::selection{background:rgba(137,165,150,.28);}
+a{text-decoration:none;color:inherit;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:.95rem 2.5rem;display:flex;justify-content:space-between;align-items:center;background:rgba(14,14,13,.9);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;color:var(--ow);}
+.logo em{color:var(--sage);font-style:normal;}
+.nav-links{display:flex;gap:2.2rem;}
+.nav-links a{font-family:'Space Grotesk',sans-serif;font-size:.6rem;font-weight:500;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--ow);}
+.nav-badge{display:flex;align-items:center;gap:.5rem;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--sage);animation:pulse-dot 2s infinite;}
+.live-txt{font-family:'Space Grotesk',sans-serif;font-size:.58rem;font-weight:600;color:var(--sage);}
+
+/* PAGE HEADER */
+.page-header{padding:7rem 2.5rem 3rem;max-width:1080px;margin:0 auto;}
+.page-header-inner{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;}
+.eyebrow{font-family:'Space Grotesk',sans-serif;font-size:.56rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);margin-bottom:.6rem;}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;letter-spacing:-2px;line-height:.95;}
+h1 em{font-family:'Plus Jakarta Sans',sans-serif;font-style:italic;font-weight:800;color:var(--sage);}
+.page-header p{font-size:.85rem;color:var(--muted);line-height:1.75;max-width:420px;margin-top:.6rem;}
+
+/* BUTTONS */
+.btn{font-family:'Space Grotesk',sans-serif;font-weight:700;border:none;border-radius:13px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .25s;}
+.btn-sage{font-size:.78rem;padding:12px 22px;background:var(--sage);color:#fff;}
+.btn-sage:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(137,165,150,.25);}
+.btn-ghost{font-size:.78rem;padding:12px 22px;background:var(--card2);color:var(--ow);border:1px solid var(--border);}
+.btn-ghost:hover{background:var(--bg3);border-color:rgba(245,243,239,.14);transform:translateY(-2px);}
+.bi{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.55rem;flex-shrink:0;}
+.bi-w{background:rgba(255,255,255,.18);}
+
+/* SECTION */
+.wrap{max-width:1080px;margin:0 auto;padding:3rem 2.5rem;}
+.sec-tag{font-family:'Space Grotesk',sans-serif;font-size:.54rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--sage);margin-bottom:.6rem;}
+.sec-h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.3rem,2.4vw,1.9rem);font-weight:700;letter-spacing:-.8px;margin-bottom:1.5rem;}
+.sec-h2 em{font-family:'Plus Jakarta Sans',sans-serif;font-style:italic;font-weight:800;color:var(--sage);}
+.divider{height:1px;background:var(--border);max-width:1080px;margin:0 auto;}
+
+/* FILTER TABS */
+.filter-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2rem;}
+.tab{font-family:'Space Grotesk',sans-serif;font-size:.62rem;font-weight:600;letter-spacing:.04em;padding:7px 16px;border-radius:50px;border:1px solid var(--border);background:var(--card);color:var(--muted);cursor:pointer;transition:all .2s;}
+.tab:hover{border-color:var(--sage-border);color:var(--ow);}
+.tab.active{background:var(--sage-dim);color:var(--sage);border-color:var(--sage-border);}
+
+/* BENTO GRID */
+.bento-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+
+/* BENTO CARD */
+.bento{background:var(--bg2);border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .3s cubic-bezier(.22,1,.36,1);cursor:pointer;position:relative;}
+.bento:hover{border-color:var(--sage-border);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.35);}
+.bento.expanded{border-color:var(--sage-border);background:var(--bg3);}
+.bento-top{padding:1.4rem;}
+.bento-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:.8rem;}
+.bento-cat{font-family:'Space Grotesk',sans-serif;font-size:.5rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:50px;background:var(--sage-dim);color:var(--sage);border:1px solid var(--sage-border);}
+.bento-diff{font-family:'Space Grotesk',sans-serif;font-size:.52rem;font-weight:600;color:var(--muted);}
+.bento-title{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;letter-spacing:-.2px;margin-bottom:.4rem;color:var(--ow);}
+.bento-desc{font-size:.7rem;color:var(--muted);line-height:1.6;}
+.bento-meta{display:flex;gap:.8rem;padding:.8rem 1.4rem;border-top:1px solid var(--border);flex-wrap:wrap;}
+.bento-meta-item{font-family:'Space Grotesk',sans-serif;font-size:.54rem;font-weight:500;color:var(--muted);display:flex;align-items:center;gap:.3rem;}
+
+/* EXPANDED CONTENT */
+.bento-expanded{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.22,1,.36,1);}
+.bento.expanded .bento-expanded{max-height:500px;}
+.bento-expanded-inner{padding:0 1.4rem 1.4rem;}
+.bento-section-title{font-family:'Space Grotesk',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;margin-top:1rem;}
+.bento-tips{display:flex;flex-direction:column;gap:.3rem;}
+.bento-tip{font-size:.68rem;color:var(--ow);display:flex;align-items:flex-start;gap:.5rem;line-height:1.5;}
+.bento-tip::before{content:'→';color:var(--sage);font-family:'Space Grotesk',sans-serif;font-size:.6rem;flex-shrink:0;margin-top:.1rem;}
+.bento-script{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:.8rem 1rem;font-size:.67rem;color:var(--muted);line-height:1.6;font-style:italic;margin-top:.5rem;}
+.bento-btn-row{display:flex;gap:.5rem;padding:1rem 1.4rem;border-top:1px solid var(--border);align-items:center;}
+.bento-toggle-text{font-family:'Space Grotesk',sans-serif;font-size:.6rem;font-weight:600;color:var(--sage);cursor:pointer;display:flex;align-items:center;gap:.3rem;margin-left:auto;}
+.bento-toggle-icon{transition:transform .3s;}
+.bento.expanded .bento-toggle-icon{transform:rotate(180deg);}
+
+/* IDEA FORM SECTION */
+.idea-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:2rem;margin-bottom:2rem;}
+.idea-box-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;}
+.idea-icon{font-size:1.2rem;}
+.idea-title{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;}
+.idea-sub{font-size:.72rem;color:var(--muted);line-height:1.6;margin-bottom:1.2rem;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:.8rem;}
+.form-group{display:flex;flex-direction:column;gap:.35rem;}
+.form-group label{font-family:'Space Grotesk',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);}
+.form-group input,.form-group textarea,.form-group select{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:.75rem 1rem;font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;color:var(--ow);outline:none;transition:border-color .2s;-webkit-appearance:none;}
+.form-group input::placeholder,.form-group textarea::placeholder{color:rgba(245,243,239,.2);}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--sage-border);}
+.form-group textarea{resize:vertical;min-height:80px;}
+.form-group select option{background:var(--bg3);color:var(--ow);}
+
+/* CALENDRIER */
+#calendrier{scroll-margin-top:6rem;}
+.cal-wrapper{background:var(--bg2);border:1px solid var(--border);border-radius:20px;overflow:hidden;}
+.cal-header{padding:1.2rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.cal-month{font-family:'Space Grotesk',sans-serif;font-size:.95rem;font-weight:700;}
+.cal-nav{display:flex;gap:.5rem;}
+.cal-nav button{background:var(--bg3);border:1px solid var(--border);border-radius:9px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ow);font-size:.75rem;transition:all .2s;}
+.cal-nav button:hover{border-color:var(--sage-border);background:var(--sage-dim);}
+.cal-legend{padding:.8rem 1.5rem;border-bottom:1px solid var(--border);display:flex;gap:1.5rem;}
+.cal-legend-item{display:flex;align-items:center;gap:.4rem;font-family:'Space Grotesk',sans-serif;font-size:.58rem;font-weight:500;color:var(--muted);}
+.cal-legend-dot{width:8px;height:8px;border-radius:50%;}
+.cal-days-header{display:grid;grid-template-columns:repeat(7,1fr);padding:.5rem 1rem 0;}
+.cal-day-label{font-family:'Space Grotesk',sans-serif;font-size:.55rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:center;padding:.5rem 0;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:.5rem 1rem 1.2rem;}
+.cal-cell{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:default;position:relative;transition:all .2s;}
+.cal-cell.empty{opacity:0;}
+.cal-cell.today .cal-num{background:var(--sage);color:#fff;border-radius:50%;}
+.cal-num{font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:600;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s;}
+.cal-cell.available{cursor:pointer;}
+.cal-cell.available:hover{background:var(--sage-dim);}
+.cal-cell.available .cal-num{color:var(--sage);}
+.cal-cell.available::after{content:'';position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:var(--sage);}
+.cal-cell.full .cal-num{color:rgba(245,243,239,.25);}
+.cal-cell.full::after{content:'';position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:rgba(194,184,174,.3);}
+.cal-cell.past .cal-num{color:rgba(245,243,239,.2);}
+.cal-bookings{padding:0 1.5rem 1.5rem;display:flex;flex-direction:column;gap:.5rem;}
+.cal-booking{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:.75rem 1rem;display:flex;align-items:center;gap:.8rem;}
+.cal-booking-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.cal-booking-date{font-family:'Space Grotesk',sans-serif;font-size:.65rem;font-weight:700;color:var(--ow);min-width:60px;}
+.cal-booking-name{font-family:'Space Grotesk',sans-serif;font-size:.65rem;font-weight:600;color:var(--sage);}
+.cal-booking-subject{font-size:.62rem;color:var(--muted);flex:1;}
+.cal-booking-format{font-family:'Space Grotesk',sans-serif;font-size:.52rem;font-weight:600;background:var(--sage-dim);color:var(--sage);border:1px solid var(--sage-border);border-radius:50px;padding:2px 8px;}
+
+/* OVERLAY */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(6px);}
+.overlay.open{opacity:1;pointer-events:all;}
+.overlay-box{background:var(--bg2);border:1px solid var(--sage-border);border-radius:24px;max-width:520px;width:100%;max-height:90vh;overflow-y:auto;transform:translateY(20px);transition:transform .35s cubic-bezier(.22,1,.36,1);}
+.overlay.open .overlay-box{transform:translateY(0);}
+.overlay-header{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.overlay-title{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700;}
+.overlay-close{width:32px;height:32px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.8rem;transition:all .2s;}
+.overlay-close:hover{border-color:var(--sage-border);color:var(--ow);}
+.overlay-body{padding:1.5rem;}
+.overlay-subject-badge{background:var(--sage-dim);border:1px solid var(--sage-border);border-radius:12px;padding:.8rem 1rem;margin-bottom:1.2rem;display:flex;align-items:center;gap:.6rem;}
+.overlay-subject-tag{font-family:'Space Grotesk',sans-serif;font-size:.52rem;font-weight:600;color:var(--sage);background:rgba(137,165,150,.15);border-radius:50px;padding:2px 8px;}
+.overlay-subject-title{font-family:'Space Grotesk',sans-serif;font-size:.82rem;font-weight:700;color:var(--ow);}
+.or-divider{display:flex;align-items:center;gap:.8rem;margin:1rem 0;}
+.or-line{flex:1;height:1px;background:var(--border);}
+.or-text{font-family:'Space Grotesk',sans-serif;font-size:.58rem;font-weight:600;color:var(--muted);letter-spacing:.06em;}
+.days-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1rem;}
+.day-btn{background:var(--bg3);border:1px solid var(--border);border-radius:11px;padding:.7rem .5rem;text-align:center;cursor:pointer;transition:all .2s;}
+.day-btn:hover,.day-btn.sel{background:var(--sage-dim);border-color:var(--sage-border);}
+.day-btn-date{font-family:'Space Grotesk',sans-serif;font-size:.75rem;font-weight:700;color:var(--ow);}
+.day-btn-label{font-size:.58rem;color:var(--muted);}
+.day-btn.full{opacity:.4;cursor:not-allowed;}
+.day-btn.full:hover{background:var(--bg3);border-color:var(--border);}
+.success-msg{display:none;background:var(--sage-dim);border:1px solid var(--sage-border);border-radius:14px;padding:1.2rem;text-align:center;}
+.success-msg.show{display:block;}
+.success-icon{font-size:1.8rem;margin-bottom:.5rem;}
+.success-t{font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:700;color:var(--ow);margin-bottom:.3rem;}
+.success-s{font-size:.72rem;color:var(--muted);}
+
+/* ANIMATIONS */
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(137,165,150,.5)}70%{box-shadow:0 0 0 6px rgba(137,165,150,0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.fu{opacity:0;animation:fadeUp .65s cubic-bezier(.22,1,.36,1) forwards;}
+.d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1);}
+.reveal.on{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">/aeconomia. <em>régie</em></a>
+  <div class="nav-links">
+    <a href="index.html">Accueil</a>
+    <a href="filmer.html" class="active">Je filme</a>
+    <a href="academie.html">Académie</a>
+  </div>
+  <div class="nav-badge">
+    <span class="live-dot"></span>
+    <span class="live-txt">Espace équipe</span>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<div class="page-header fu d1">
+  <div class="page-header-inner">
+    <div>
+      <div class="eyebrow">🎬 Je veux filmer du contenu</div>
+      <h1>Choisissez votre<br/><em>prochaine vidéo.</em></h1>
+      <p>28 formats prêts à tourner. Cliquez sur un bento pour tout savoir, puis réservez votre créneau en bas. Vous pouvez aussi proposer votre propre idée.</p>
+    </div>
+    <div style="display:flex;gap:.7rem;flex-wrap:wrap;">
+      <a href="#calendrier" class="btn btn-sage">📅 Voir le calendrier <span class="bi bi-w">↓</span></a>
+      <a href="#mon-idee" class="btn btn-ghost">💡 Proposer une idée</a>
+    </div>
+  </div>
+</div>
+
+<!-- TIPS & CONSEILS -->
+<section class="wrap">
+  <div class="reveal">
+    <div class="sec-tag">Tips & Conseils</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+      <div class="sec-h2">Courts, éducatifs, <em>très partagés.</em></div>
+      <p style="font-size:.72rem;color:var(--muted);max-width:320px;">Idéaux pour montrer l'expertise. Pas besoin de script complexe — juste une info utile et une bonne lumière.</p>
+    </div>
+  </div>
+  <div class="bento-grid reveal" style="transition-delay:.05s">
+
+    <div class="bento" onclick="toggleBento(this,'tips-1')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Tips</span><span class="bento-diff">🟢 Facile</span></div>
+        <div class="bento-title">Le saviez-vous ?</div>
+        <div class="bento-desc">Une info surprenante sur le crédit immobilier que la majorité des gens ignorent. Format choc qui génère de l'engagement et des partages.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 30-45s</span>
+        <span class="bento-meta-item">📱 Reel + TikTok</span>
+        <span class="bento-meta-item">🎯 Fort engagement</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Idées de sujets</div>
+          <div class="bento-tips">
+            <div class="bento-tip">Le taux d'endettement à 35% : ce que peu de gens savent vraiment</div>
+            <div class="bento-tip">On peut renégocier son assurance emprunteur à tout moment</div>
+            <div class="bento-tip">Un apport de 10% ne veut pas dire qu'on emprunte 90%</div>
+          </div>
+          <div class="bento-section-title">Structure recommandée</div>
+          <div class="bento-script">"Ce que votre banque ne vous dit pas sur [X]… [pause] En réalité, [révélation]. Et ça peut vous coûter/faire économiser [montant]. Suivez-nous pour tout savoir avant votre achat."</div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'Le saviez-vous ?','Tips')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+    <div class="bento" onclick="toggleBento(this,'tips-2')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Tips</span><span class="bento-diff">🟢 Facile</span></div>
+        <div class="bento-title">L'erreur à ne pas faire</div>
+        <div class="bento-desc">Une erreur classique des acheteurs qui coûte cher. Format "mise en garde" qui positionne comme expert de confiance.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 45-60s</span>
+        <span class="bento-meta-item">📱 Reel + LinkedIn</span>
+        <span class="bento-meta-item">🎯 Haute crédibilité</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Idées de sujets</div>
+          <div class="bento-tips">
+            <div class="bento-tip">Changer de banque juste avant de déposer un dossier</div>
+            <div class="bento-tip">Signer un compromis sans avoir sa capacité d'emprunt validée</div>
+            <div class="bento-tip">Prendre le premier taux proposé par sa banque habituelle</div>
+          </div>
+          <div class="bento-section-title">Structure recommandée</div>
+          <div class="bento-script">"Si vous faites ça avant votre achat immo, vous risquez [conséquence]. J'ai vu des dizaines de dossiers tomber à cause de [erreur]. Voilà comment éviter le piège…"</div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'L\'erreur à ne pas faire','Tips')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+    <div class="bento" onclick="toggleBento(this,'tips-3')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Tips</span><span class="bento-diff">🟢 Facile</span></div>
+        <div class="bento-title">Votre budget en 60 sec</div>
+        <div class="bento-desc">Simulation express face caméra. Montrez comment vous calculez une capacité d'emprunt en temps réel — concret, utile, mémorable.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 60s</span>
+        <span class="bento-meta-item">📱 TikTok + Reel</span>
+        <span class="bento-meta-item">🎯 Forte utilité</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Conseils de tournage</div>
+          <div class="bento-tips">
+            <div class="bento-tip">Utiliser le simulateur Aeconomia à l'écran (screenshare ou téléphone visible)</div>
+            <div class="bento-tip">Prendre des chiffres concrets : 3 500 €/mois nets = X € sur 25 ans</div>
+            <div class="bento-tip">Finir par "Et si vous voulez votre simulation perso, c'est gratuit"</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'Votre budget en 60 sec','Tips')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+    <div class="bento" onclick="toggleBento(this,'tips-4')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Tips</span><span class="bento-diff">🟡 Moyen</span></div>
+        <div class="bento-title">Décryptage taux du mois</div>
+        <div class="bento-desc">Analyse des taux actuels du marché. Ce qui change, pourquoi, et ce que ça signifie concrètement pour un acheteur.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 60-90s</span>
+        <span class="bento-meta-item">📱 LinkedIn + Reel</span>
+        <span class="bento-meta-item">🎯 Expertise</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Structure recommandée</div>
+          <div class="bento-tips">
+            <div class="bento-tip">Contexte en 1 phrase : "En [mois], les taux sont à [X]%..."</div>
+            <div class="bento-tip">Ce que ça change : "Sur 20 ans, 0.2% de plus = [montant] de plus"</div>
+            <div class="bento-tip">Conseil pratique : "Notre recommandation en ce moment…"</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'Décryptage taux','Tips')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+    <div class="bento" onclick="toggleBento(this,'tips-5')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Tips</span><span class="bento-diff">🟢 Facile</span></div>
+        <div class="bento-title">3 choses à savoir avant d'acheter</div>
+        <div class="bento-desc">Format liste très engageant. 3 informations courtes, rythmées, que tout acheteur devrait connaître mais que personne ne lui dit.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 45-60s</span>
+        <span class="bento-meta-item">📱 TikTok + Reel</span>
+        <span class="bento-meta-item">🎯 Fort save/share</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Exemples de triptyques</div>
+          <div class="bento-tips">
+            <div class="bento-tip">1. Le taux n'est pas tout / 2. L'assurance ça se négocie / 3. Le courtier ne vous coûte rien</div>
+            <div class="bento-tip">1. Sans apport c'est possible / 2. Les frais de notaire / 3. La durée idéale</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'3 choses à savoir','Tips')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+    <div class="bento" onclick="toggleBento(this,'tips-6')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Tips</span><span class="bento-diff">🟡 Moyen</span></div>
+        <div class="bento-title">Comment ça marche ?</div>
+        <div class="bento-desc">Explication simple d'un concept financier que les clients trouvent complexe : PTZ, LMNP, rachat de soulte, taux variable…</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 60-75s</span>
+        <span class="bento-meta-item">📱 LinkedIn + Reel</span>
+        <span class="bento-meta-item">🎯 Éducatif</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Sujets possibles</div>
+          <div class="bento-tips">
+            <div class="bento-tip">Comment fonctionne le PTZ (prêt à taux zéro) en 2026</div>
+            <div class="bento-tip">Taux fixe vs taux variable : la vraie différence</div>
+            <div class="bento-tip">C'est quoi un rachat de soulte après une séparation ?</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'Comment ça marche ?','Tips')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PORTRAITS & TEMOIGNAGES -->
+<section class="wrap">
+  <div class="reveal">
+    <div class="sec-tag">Témoignages & Portraits</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+      <div class="sec-h2">Humain, <em>mémorable.</em></div>
+      <p style="font-size:.72rem;color:var(--muted);max-width:320px;">Ces formats créent la confiance. Les gens achètent à des gens qu'ils connaissent.</p>
+    </div>
+  </div>
+  <div class="bento-grid reveal" style="transition-delay:.05s">
+
+    <div class="bento" onclick="toggleBento(this,'port-1')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Portrait</span><span class="bento-diff">🟢 Facile</span></div>
+        <div class="bento-title">Mon dossier le plus fou</div>
+        <div class="bento-desc">Un cas marquant anonymisé — la situation de départ, les difficultés, la solution trouvée. Storytelling pur qui accroche.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 60-90s</span>
+        <span class="bento-meta-item">📱 Reel + TikTok</span>
+        <span class="bento-meta-item">🎯 Storytelling fort</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Structure narrative</div>
+          <div class="bento-tips">
+            <div class="bento-tip">Hook : "On m'a appelé un vendredi soir pour un dossier que 3 banques avaient refusé…"</div>
+            <div class="bento-tip">Tension : la situation qui semblait impossible</div>
+            <div class="bento-tip">Résolution : ce qui a été trouvé et comment</div>
+            <div class="bento-tip">Conclusion : "C'est pour ça qu'on ne lâche jamais."</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'Mon dossier le plus fou','Portrait')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+    <div class="bento" onclick="toggleBento(this,'port-2')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Portrait</span><span class="bento-diff">🟢 Facile</span></div>
+        <div class="bento-title">Pourquoi je suis courtier</div>
+        <div class="bento-desc">Votre histoire personnelle, ce qui vous a amené à ce métier, ce que vous aimez vraiment dans votre quotidien. Authenticité totale.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 60-90s</span>
+        <span class="bento-meta-item">📱 Instagram + LinkedIn</span>
+        <span class="bento-meta-item">🎯 Proximité</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Questions guides</div>
+          <div class="bento-tips">
+            <div class="bento-tip">C'était quoi votre parcours avant Aeconomia ?</div>
+            <div class="bento-tip">Quel est le moment qui vous a le plus marqué avec un client ?</div>
+            <div class="bento-tip">Qu'est-ce qui vous motive encore chaque matin ?</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'Pourquoi je suis courtier','Portrait')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+    <div class="bento" onclick="toggleBento(this,'port-3')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Portrait</span><span class="bento-diff">🟢 Facile</span></div>
+        <div class="bento-title">Voici ce que j'ai négocié</div>
+        <div class="bento-desc">Mettez en avant un résultat concret obtenu pour un client. Chiffres réels, contexte anonymisé, impact tangible.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 45-60s</span>
+        <span class="bento-meta-item">📱 Reel + LinkedIn</span>
+        <span class="bento-meta-item">🎯 Preuve sociale</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Exemple de script</div>
+          <div class="bento-script">"Cette semaine j'ai négocié [taux X]% pour un client avec [profil]. Sa banque lui proposait [Y]%. Économie sur 20 ans : [montant]. Voilà pourquoi passer par un courtier change tout."</div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'Ce que j\'ai négocié','Portrait')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+    <div class="bento" onclick="toggleBento(this,'port-4')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Coulisses</span><span class="bento-diff">🟢 Facile</span></div>
+        <div class="bento-title">Célébration remise de clés</div>
+        <div class="bento-desc">Un client reçoit ses clés. Réaction authentique, émotion vraie. Le format le plus court et le plus puissant de l'immobilier.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 20-30s</span>
+        <span class="bento-meta-item">📱 Stories + Reel</span>
+        <span class="bento-meta-item">🎯 Émotion maximale</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Conseils</div>
+          <div class="bento-tips">
+            <div class="bento-tip">Demander l'accord du client avant de filmer (toujours)</div>
+            <div class="bento-tip">Filmer la réaction spontanée, pas la pose</div>
+            <div class="bento-tip">Ajouter une musique émouvante au montage</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'Célébration remise de clés','Coulisses')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+    <div class="bento" onclick="toggleBento(this,'port-5')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Coulisses</span><span class="bento-diff">🟡 Moyen</span></div>
+        <div class="bento-title">Ma journée type</div>
+        <div class="bento-desc">3-4 extraits de votre quotidien montés en 60s. Réveil, appels, rendez-vous, résultats. Montre la réalité du métier.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 45-60s</span>
+        <span class="bento-meta-item">📱 TikTok + Reel</span>
+        <span class="bento-meta-item">🎯 Humanité</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Ce qu'il faut filmer</div>
+          <div class="bento-tips">
+            <div class="bento-tip">Matin : votre café + première tâche du jour (15s)</div>
+            <div class="bento-tip">Milieu de journée : un appel ou une réunion (floutée si besoin, 15s)</div>
+            <div class="bento-tip">Fin de journée : résultat du jour + mot de fin face caméra (20s)</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'Ma journée type','Coulisses')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+    <div class="bento" onclick="toggleBento(this,'port-6')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">FAQ</span><span class="bento-diff">🟢 Facile</span></div>
+        <div class="bento-title">La question qu'on me pose tout le temps</div>
+        <div class="bento-desc">Répondez à une question que vos clients posent systématiquement. Naturel, spontané, sans script — juste vous.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 45-60s</span>
+        <span class="bento-meta-item">📱 Reel + TikTok</span>
+        <span class="bento-meta-item">🎯 Authenticité</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Questions fréquentes</div>
+          <div class="bento-tips">
+            <div class="bento-tip">"Est-ce que vous prenez vraiment en charge tout le dossier ?"</div>
+            <div class="bento-tip">"Ça coûte combien de passer par vous ?"</div>
+            <div class="bento-tip">"Ma banque me dit non — vous pouvez vraiment faire quelque chose ?"</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'FAQ - Question courante','FAQ')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MARCHE -->
+<section class="wrap">
+  <div class="reveal">
+    <div class="sec-tag">Marché & Actualité</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+      <div class="sec-h2">Positionnez-vous comme <em>référence.</em></div>
+    </div>
+  </div>
+  <div class="bento-grid reveal" style="transition-delay:.05s">
+
+    <div class="bento" onclick="toggleBento(this,'mkt-1')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Marché</span><span class="bento-diff">🟡 Moyen</span></div>
+        <div class="bento-title">Bilan taux du mois</div>
+        <div class="bento-desc">Évolution des taux sur le mois écoulé, tendances, projections. Format carrousel ou vidéo analyse.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 60-90s</span>
+        <span class="bento-meta-item">📱 LinkedIn + Reel</span>
+        <span class="bento-meta-item">🎯 Autorité</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Données à inclure</div>
+          <div class="bento-tips">
+            <div class="bento-tip">Taux moyen sur 15, 20, 25 ans (source Aeconomia)</div>
+            <div class="bento-tip">Comparaison avec le mois précédent</div>
+            <div class="bento-tip">Impact concret sur une mensualité type</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'Bilan taux du mois','Marché')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+    <div class="bento" onclick="toggleBento(this,'mkt-2')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Marché</span><span class="bento-diff">🟡 Moyen</span></div>
+        <div class="bento-title">Est-ce le bon moment d'acheter ?</div>
+        <div class="bento-desc">Prise de position argumentée sur le marché actuel. Très partagé car tout le monde se pose cette question.</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 60-90s</span>
+        <span class="bento-meta-item">📱 Reel + LinkedIn</span>
+        <span class="bento-meta-item">🎯 Débat = portée</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Angles possibles</div>
+          <div class="bento-tips">
+            <div class="bento-tip">Oui si vous avez un projet de vie long terme (20 ans)</div>
+            <div class="bento-tip">Non si vous achetez par peur de rater quelque chose</div>
+            <div class="bento-tip">Ça dépend : les 3 critères à regarder</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'Bon moment d\'acheter ?','Marché')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+    <div class="bento" onclick="toggleBento(this,'mkt-3')">
+      <div class="bento-top">
+        <div class="bento-header"><span class="bento-cat">Marché</span><span class="bento-diff">🟡 Moyen</span></div>
+        <div class="bento-title">Ce que change la loi / actualité</div>
+        <div class="bento-desc">Impact d'une actualité récente sur les acheteurs. Sujets : DPE, PTZ, nouvelles règles bancaires…</div>
+      </div>
+      <div class="bento-meta">
+        <span class="bento-meta-item">⏱ 60s</span>
+        <span class="bento-meta-item">📱 LinkedIn + Reel</span>
+        <span class="bento-meta-item">🎯 Timing fort</span>
+      </div>
+      <div class="bento-expanded">
+        <div class="bento-expanded-inner">
+          <div class="bento-section-title">Conseils</div>
+          <div class="bento-tips">
+            <div class="bento-tip">Réagir dans les 48h après une actualité = portée × 3</div>
+            <div class="bento-tip">Toujours expliquer l'impact concret pour l'acheteur moyen</div>
+            <div class="bento-tip">Vérifier les infos avec Dimitri avant publication</div>
+          </div>
+        </div>
+      </div>
+      <div class="bento-btn-row">
+        <button class="btn btn-sage" style="font-size:.65rem;padding:8px 14px;" onclick="openBooking(event,'Actualité marché','Marché')">✋ Je prends ce sujet</button>
+        <span class="bento-toggle-text">Voir le brief <span class="bento-toggle-icon">▾</span></span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- IDEE PERSO -->
+<section class="wrap" id="mon-idee">
+  <div class="reveal">
+    <div class="sec-tag">Votre propre idée</div>
+    <div class="sec-h2" style="margin-bottom:.5rem;">Vous avez une idée ?<br/><em>Proposez-la.</em></div>
+    <p style="font-size:.78rem;color:var(--muted);line-height:1.7;margin-bottom:1.5rem;max-width:500px;">Pas besoin que ce soit dans le menu. Si vous avez un angle original, une anecdote à raconter ou un format à tester — c'est ici. Valentine valide et programme.</p>
+  </div>
+  <div class="idea-box reveal" style="transition-delay:.05s">
+    <div class="idea-box-header">
+      <span class="idea-icon">💡</span>
+      <div class="idea-title">Formulaire idée</div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Votre prénom *</label>
+        <input type="text" id="idea-prenom" placeholder="Ex : Gabriel"/>
+      </div>
+      <div class="form-group">
+        <label>Titre de votre idée *</label>
+        <input type="text" id="idea-titre" placeholder="Ex : Pourquoi j'ai refusé un client"/>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Catégorie</label>
+        <select id="idea-cat">
+          <option value="">Choisir...</option>
+          <option>Tips & Conseils</option>
+          <option>Portrait / Histoire</option>
+          <option>Marché & Actualité</option>
+          <option>Coulisses</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Format envisagé</label>
+        <select id="idea-format">
+          <option value="">Choisir...</option>
+          <option>Reel 30-45s</option>
+          <option>Reel 60-90s</option>
+          <option>Story</option>
+          <option>Carrousel LinkedIn</option>
+          <option>Interview</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group" style="margin-bottom:.8rem;">
+      <label>Description de votre idée *</label>
+      <textarea id="idea-desc" placeholder="Décrivez votre idée en quelques lignes : le sujet, l'angle, ce que vous voulez dire..."></textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Quand pouvez-vous filmer ?</label>
+        <input type="date" id="idea-date"/>
+      </div>
+      <div class="form-group" style="justify-content:flex-end;">
+        <button class="btn btn-sage" style="margin-top:auto;" onclick="submitIdea()">Envoyer mon idée <span class="bi bi-w">→</span></button>
+      </div>
+    </div>
+    <div id="idea-success" class="success-msg" style="margin-top:1rem;">
+      <div class="success-icon">✅</div>
+      <div class="success-t">Idée envoyée !</div>
+      <div class="success-s">Valentine va regarder ça et vous revient sous 24h.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CALENDRIER -->
+<section class="wrap" id="calendrier">
+  <div class="reveal">
+    <div class="sec-tag">Calendrier de tournage</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+      <div class="sec-h2">Réservez votre <em>créneau.</em></div>
+      <p style="font-size:.72rem;color:var(--muted);max-width:320px;">Les jours verts sont disponibles. Gris = complet. Choisissez une date, entrez votre prénom — c'est réservé.</p>
+    </div>
+  </div>
+  <div class="cal-wrapper reveal" style="transition-delay:.05s">
+    <div class="cal-header">
+      <div class="cal-month" id="cal-month-title">Avril 2026</div>
+      <div class="cal-nav">
+        <button onclick="changeMonth(-1)">‹</button>
+        <button onclick="changeMonth(1)">›</button>
+      </div>
+    </div>
+    <div class="cal-legend">
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--sage);"></div>Disponible</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:var(--beige);"></div>Complet</div>
+      <div class="cal-legend-item"><div class="cal-legend-dot" style="background:rgba(245,243,239,.15);"></div>Non disponible</div>
+    </div>
+    <div class="cal-days-header">
+      <div class="cal-day-label">Lun</div>
+      <div class="cal-day-label">Mar</div>
+      <div class="cal-day-label">Mer</div>
+      <div class="cal-day-label">Jeu</div>
+      <div class="cal-day-label">Ven</div>
+      <div class="cal-day-label">Sam</div>
+      <div class="cal-day-label">Dim</div>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+    <div style="padding:.5rem 1.5rem 1rem;font-family:'Space Grotesk',sans-serif;font-size:.55rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);">Réservations du mois</div>
+    <div class="cal-bookings" id="cal-bookings"></div>
+  </div>
+</section>
+
+<footer style="border-top:1px solid var(--border);padding:1.8rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+  <div style="font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:700;">/aeconomia. <span style="color:var(--sage);">régie</span></div>
+  <div style="display:flex;gap:1.5rem;align-items:center;">
+    <a href="index.html" style="font-family:'Space Grotesk',sans-serif;font-size:.6rem;color:var(--muted);">← Accueil</a>
+    <a href="academie.html" style="font-family:'Space Grotesk',sans-serif;font-size:.6rem;color:var(--muted);">Académie →</a>
+  </div>
+</footer>
+
+<!-- OVERLAY RÉSERVATION -->
+<div class="overlay" id="booking-overlay" onclick="closeBookingOnBg(event)">
+  <div class="overlay-box">
+    <div class="overlay-header">
+      <div class="overlay-title">📅 Réserver un créneau</div>
+      <button class="overlay-close" onclick="closeBooking()">✕</button>
+    </div>
+    <div class="overlay-body">
+      <div class="overlay-subject-badge" id="overlay-subject-badge">
+        <div>
+          <div class="overlay-subject-tag" id="overlay-cat-tag">Tips</div>
+          <div class="overlay-subject-title" id="overlay-subject-title">Sujet sélectionné</div>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label>Votre prénom *</label>
+        <input type="text" id="booking-prenom" placeholder="Ex : Delphine"/>
+      </div>
+
+      <div style="font-family:'Space Grotesk',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem;">Choisir une date disponible</div>
+      <div class="days-grid" id="booking-days"></div>
+
+      <div class="or-divider">
+        <div class="or-line"></div>
+        <div class="or-text">ou une date libre</div>
+        <div class="or-line"></div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:.8rem;">
+        <label>Date souhaitée</label>
+        <input type="date" id="booking-date-libre"/>
+      </div>
+
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label>Note (optionnel)</label>
+        <input type="text" id="booking-note" placeholder="Ex : je préfère l'après-midi"/>
+      </div>
+
+      <button class="btn btn-sage" style="width:100%;justify-content:center;font-size:.8rem;padding:13px;" onclick="confirmBooking()">
+        Confirmer ma réservation <span class="bi bi-w">→</span>
+      </button>
+
+      <div id="booking-success" class="success-msg" style="margin-top:1rem;">
+        <div class="success-icon">🎬</div>
+        <div class="success-t">Créneau réservé !</div>
+        <div class="success-s" id="booking-success-txt">Valentine vous confirmera le créneau sous 24h.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Reveal
+const revs=document.querySelectorAll('.reveal');
+const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');});},{threshold:.06});
+revs.forEach(r=>ro.observe(r));
+
+// BENTO TOGGLE
+function toggleBento(el,id){
+  const wasOpen=el.classList.contains('expanded');
+  document.querySelectorAll('.bento').forEach(b=>b.classList.remove('expanded'));
+  if(!wasOpen){
+    el.classList.add('expanded');
+    setTimeout(()=>el.scrollIntoView({behavior:'smooth',block:'nearest'}),100);
+  }
+}
+
+// Booking state
+let currentSubject='';let currentCat='';let selectedDay=null;
+
+// Available filming days (editable - these are the days Dimitri sets)
+const AVAILABLE_DAYS={
+  '2026-04':[3,8,10,15,17,22,24,29],
+  '2026-05':[5,7,12,14,19,21,26,28],
+};
+const FULL_DAYS={'2026-04':[3,10],'2026-05':[5]};
+
+// Bookings store
+let bookings=[
+  {date:'2026-04-08',prenom:'Raphael',subject:'Décryptage taux avril',format:'Tips',color:'var(--sage)'},
+  {date:'2026-04-15',prenom:'Delphine',subject:'Témoignage client',format:'Portrait',color:'var(--beige)'},
+  {date:'2026-04-22',prenom:'Robin',subject:'Mon dossier le plus fou',format:'Portrait',color:'var(--sage)'},
+];
+
+function openBooking(e,subject,cat){
+  e.stopPropagation();
+  currentSubject=subject;currentCat=cat;selectedDay=null;
+  document.getElementById('overlay-subject-title').textContent=subject;
+  document.getElementById('overlay-cat-tag').textContent=cat;
+  document.getElementById('booking-prenom').value='';
+  document.getElementById('booking-note').value='';
+  document.getElementById('booking-date-libre').value='';
+  document.getElementById('booking-success').classList.remove('show');
+  renderBookingDays();
+  document.getElementById('booking-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeBooking(){
+  document.getElementById('booking-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeBookingOnBg(e){if(e.target===document.getElementById('booking-overlay'))closeBooking();}
+
+function renderBookingDays(){
+  const now=new Date();const y=now.getFullYear();const m=now.getMonth()+1;
+  const key=`${y}-${String(m).padStart(2,'0')}`;
+  const avail=AVAILABLE_DAYS[key]||[];const full=FULL_DAYS[key]||[];
+  const days=avail.slice(0,6);
+  const months=['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+  const dayNames=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
+  document.getElementById('booking-days').innerHTML=days.map(d=>{
+    const dt=new Date(y,m-1,d);
+    const isFull=full.includes(d);
+    const dateStr=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    return `<div class="day-btn ${isFull?'full':''}" onclick="${isFull?'':``selectDay(this,'${dateStr}')``}">
+      <div class="day-btn-date">${d} ${months[m-1]}</div>
+      <div class="day-btn-label">${dayNames[dt.getDay()]} · ${isFull?'Complet':'Disponible'}</div>
+    </div>`;
+  }).join('');
+}
+
+function selectDay(el,date){
+  document.querySelectorAll('.day-btn').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+  selectedDay=date;
+}
+
+function confirmBooking(){
+  const prenom=document.getElementById('booking-prenom').value.trim();
+  if(!prenom){document.getElementById('booking-prenom').focus();return;}
+  const date=selectedDay||document.getElementById('booking-date-libre').value;
+  if(!date){return;}
+  bookings.push({date,prenom,subject:currentSubject,format:currentCat,color:'var(--sage)'});
+  document.getElementById('booking-success-txt').textContent=`${prenom}, votre créneau pour "${currentSubject}" a été enregistré. Valentine vous confirme sous 24h.`;
+  document.getElementById('booking-success').classList.add('show');
+  renderCalBookings();
+  setTimeout(()=>closeBooking(),2200);
+}
+
+function submitIdea(){
+  const p=document.getElementById('idea-prenom').value.trim();
+  const t=document.getElementById('idea-titre').value.trim();
+  const d=document.getElementById('idea-desc').value.trim();
+  if(!p||!t||!d)return;
+  document.getElementById('idea-success').classList.add('show');
+  setTimeout(()=>document.getElementById('idea-success').classList.remove('show'),3000);
+}
+
+// CALENDAR
+let calYear=2026;let calMonth=3; // 0-indexed = April
+const MONTHS=['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+
+function renderCal(){
+  const key=`${calYear}-${String(calMonth+1).padStart(2,'0')}`;
+  const avail=AVAILABLE_DAYS[key]||[];
+  const full=FULL_DAYS[key]||[];
+  const firstDay=new Date(calYear,calMonth,1).getDay();
+  const offset=firstDay===0?6:firstDay-1;
+  const daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  const today=new Date();
+  document.getElementById('cal-month-title').textContent=`${MONTHS[calMonth]} ${calYear}`;
+  let html='';
+  for(let i=0;i<offset;i++)html+=`<div class="cal-cell empty"></div>`;
+  for(let d=1;d<=daysInMonth;d++){
+    const dt=new Date(calYear,calMonth,d);
+    const isPast=dt<new Date(today.getFullYear(),today.getMonth(),today.getDate());
+    const isToday=dt.toDateString()===today.toDateString();
+    const isAvail=avail.includes(d)&&!isPast;
+    const isFull=full.includes(d);
+    let cls='cal-cell';
+    if(isPast)cls+=' past';
+    else if(isFull)cls+=' full';
+    else if(isAvail)cls+=' available';
+    if(isToday)cls+=' today';
+    const dateStr=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    html+=`<div class="${cls}" ${isAvail&&!isFull?`onclick="calDayClick('${dateStr}',${d})"`:''}>
+      <span class="cal-num">${d}</span>
+    </div>`;
+  }
+  document.getElementById('cal-grid').innerHTML=html;
+  renderCalBookings();
+}
+
+function renderCalBookings(){
+  const key=`${calYear}-${String(calMonth+1).padStart(2,'0')}`;
+  const monthBookings=bookings.filter(b=>b.date.startsWith(key.split('-').join('-')));
+  if(!monthBookings.length){
+    document.getElementById('cal-bookings').innerHTML=`<div style="font-size:.7rem;color:var(--muted);padding:.5rem 0;">Aucune réservation pour ce mois. Soyez le premier !</div>`;
+    return;
+  }
+  document.getElementById('cal-bookings').innerHTML=monthBookings.map(b=>{
+    const d=new Date(b.date);const days=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];const months=['Jan','Fév','Mar','Avr','Mai','Jun','Jul','Aoû','Sep','Oct','Nov','Déc'];
+    return `<div class="cal-booking">
+      <div class="cal-booking-dot" style="background:${b.color||'var(--sage)'};"></div>
+      <div class="cal-booking-date">${days[d.getDay()]} ${d.getDate()} ${months[d.getMonth()]}</div>
+      <div class="cal-booking-name">${b.prenom}</div>
+      <div class="cal-booking-subject">${b.subject}</div>
+      <div class="cal-booking-format">${b.format}</div>
+    </div>`;
+  }).join('');
+}
+
+function calDayClick(dateStr,day){
+  currentSubject='Créneau libre';currentCat='Libre';selectedDay=dateStr;
+  document.getElementById('overlay-subject-title').textContent=`Créneau du ${day} ${MONTHS[calMonth]}`;
+  document.getElementById('overlay-cat-tag').textContent='Calendrier';
+  document.getElementById('booking-prenom').value='';
+  document.getElementById('booking-note').value='';
+  document.getElementById('booking-date-libre').value=dateStr;
+  document.getElementById('booking-success').classList.remove('show');
+  renderBookingDays();
+  document.getElementById('booking-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function changeMonth(dir){
+  calMonth+=dir;
+  if(calMonth>11){calMonth=0;calYear++;}
+  if(calMonth<0){calMonth=11;calYear--;}
+  renderCal();
+}
+
+renderCal();
+</script>
+</body>
+</html>
